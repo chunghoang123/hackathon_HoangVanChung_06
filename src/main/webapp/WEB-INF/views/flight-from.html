@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flight Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .error-msg { color: red; font-size: 14px; display: block; }
+    </style>
+</head>
+<body class="container mt-4">
+<h1 th:text="${flight.id == null ? 'Thêm Chuyến Bay' : 'Sửa Chuyến Bay'}"></h1>
+
+<form th:action="@{/flights/save}" th:object="${flight}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
+
+    <div class="form-group">
+        <label>Số hiệu chuyến bay</label>
+        <input type="text" th:field="*{flightNumber}" class="form-control">
+        <span class="error-msg" th:if="${#fields.hasErrors('flightNumber')}" th:errors="*{flightNumber}"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Điểm đến</label>
+        <input type="text" th:field="*{destination}" class="form-control">
+        <span class="error-msg" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Thời gian khởi hành</label>
+        <input type="datetime-local" th:field="*{departureTime}" class="form-control">
+        <span class="error-msg" th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Giá vé</label>
+        <input type="number" th:field="*{ticketPrice}" class="form-control" step="0.1">
+        <span class="error-msg" th:if="${#fields.hasErrors('ticketPrice')}" th:errors="*{ticketPrice}"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Logo hãng bay</label>
+        <input type="file" th:field="*{imageFile}" class="form-control-file">
+        <input type="hidden" th:field="*{airlineLogo}">
+        <div th:if="${flight.airlineLogo != null and flight.airlineLogo != ''}" class="mt-2">
+            <small>Ảnh hiện tại: <span th:text="${flight.airlineLogo}"></span></small>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu</button>
+    <a th:href="@{/flights}" class="btn btn-secondary">Hủy</a>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
